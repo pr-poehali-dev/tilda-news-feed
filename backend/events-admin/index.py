@@ -1,4 +1,4 @@
-"""Админ API: CRUD мероприятий. Защищён паролем через заголовок X-Admin-Token."""
+"""Админ API: CRUD мероприятий. Защищён паролем через заголовок X-Admin-Token. v2"""
 import json
 import os
 import psycopg2
