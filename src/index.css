@@ -206,3 +206,309 @@
   background: rgba(168, 85, 247, 0.4);
   border-radius: 3px;
 }
+
+/* ── Slider ───────────────────────────────────────── */
+
+.slider-root {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  user-select: none;
+  background: #0a0a0f;
+}
+
+/* Background image layers */
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation-duration: 0.54s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.18, 1);
+  animation-fill-mode: forwards;
+}
+
+/* Overlays */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(4, 4, 12, 0.92) 0%,
+    rgba(4, 4, 12, 0.55) 45%,
+    rgba(4, 4, 12, 0.18) 100%
+  );
+  pointer-events: none;
+}
+.slide-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Top bar */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px 14px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+  z-index: 10;
+}
+
+.top-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Instagram-style story progress bars */
+.story-bars {
+  flex: 1;
+  display: flex;
+  gap: 5px;
+}
+
+.story-bar {
+  flex: 1;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  position: relative;
+}
+
+.story-bar-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: width 0.04s linear;
+}
+
+.slide-num {
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+/* Slide content */
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 28px 80px;
+  z-index: 10;
+  animation-duration: 0.58s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  max-width: 720px;
+}
+
+@keyframes content-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cat-pill {
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  margin-bottom: 14px;
+}
+
+.slide-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 5vw, 38px);
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.01em;
+}
+
+.slide-desc {
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(13px, 2vw, 15px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 20px;
+  max-width: 520px;
+}
+
+.slide-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.slide-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "Golos Text", sans-serif;
+}
+
+.slide-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slide-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Golos Text", sans-serif;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.arrow-l {
+  left: 18px;
+}
+.arrow-r {
+  right: 18px;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 20;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    transform 0.25s,
+    width 0.25s;
+  padding: 0;
+}
+
+.dot-on {
+  width: 22px;
+  border-radius: 4px;
+  transform: none;
+}
+
+/* ── Slide transition keyframes ───────────────────── */
+
+@keyframes slide-enter-next {
+  from {
+    transform: translateX(6%) scale(1.02);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slide-exit-next {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-5%) scale(0.98);
+    opacity: 0;
+  }
+}
+@keyframes slide-enter-prev {
+  from {
+    transform: translateX(-6%) scale(1.02);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slide-exit-prev {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(5%) scale(0.98);
+    opacity: 0;
+  }
+}
