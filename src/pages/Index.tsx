@@ -146,6 +146,8 @@ export default function Index() {
   const exitAnim = dir === "next" ? "slide-exit-next" : "slide-exit-prev";
 
   return (
+    <div className="min-h-screen p-6 flex items-start justify-center">
+    <div className="w-full max-w-2xl">
     <div
       className="slider-root"
       onMouseEnter={() => setPaused(true)}
@@ -246,6 +248,8 @@ export default function Index() {
           />
         ))}
       </div>
+    </div>
+    </div>
     </div>
   );
 }
